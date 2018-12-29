@@ -9,7 +9,9 @@ cd ~
 git clone https://github.com/jaredpalmer/dotfiles.git && cd dotfiles && ./sync.sh
 ```
 
-To update later on, _after you push to github_, just run the `./sync.sh` script again. Note: `.extra` is not committed.
+To update later on, _after you push to github_, just run the `./sync.sh` script again. 
+
+> Note: `.extra` file is not committed for security
 
 ## Bash Prompt
 
