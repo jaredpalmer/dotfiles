@@ -231,10 +231,16 @@ end tell
 EOF
 }
 
-# Install @types/ 
-# Usage: `ti react react-dom`
-function ti() {
-        yarn add --dev ${*/#/@types\/}
+# Quickly install @types/..
+# Usage: `ty react react-dom`
+function ty() {
+    yarn add --dev ${*/#/@types\/}
+}
+
+# Quickly install @babel/..
+# Usage: `bab core preset-react`
+function ba() {
+    yarn add --dev ${*/#/@babel\/}
 }
 
 
