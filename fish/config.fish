@@ -3,10 +3,52 @@
 source ~/.config/fish/aliases.fish
 source ~/.config/fish/functions.fish
 
+
+set -x N_PREFIX "$HOME/n"    # equivalent of export N_PREFIX="$HOME/n";
+
+if not contains -- $N_PREFIX/bin $PATH
+  set PATH $PATH $N_PREFIX/bin
+end
+
+# jenv
+
+function export
+    set arr (echo $argv|tr = \n)
+    set -gx $arr[1] $arr[2]
+end
+
+set PATH $HOME/.jenv/shims $PATH
+
+command jenv rehash 2>/dev/null
+
+function jenv
+    set cmd $argv[1]
+    set arg ""
+    if test (count $argv) -gt 1
+        # Great... fish first array index is ... 1 !
+        set arg $argv[2..-1]
+    end
+
+    switch "$cmd"
+        case enable-plugin rehash shell shell-options
+            set script (jenv "sh-$cmd" "$arg")
+            eval $script
+        case '*'
+            command jenv $cmd $arg
+    end
+end
+
+rvm default
+
+set PATH $HOME/.jenv/bin $PATH
+set PATH $HOME/.yarn/bin $PATH
+
+
+
 # THEME PURE #
-set fish_function_path $HOME/.config/fish/functions/pure/functions/ $fish_function_path
-set fish_function_path $HOME/.config/fish/functions/pure/ $fish_function_path
-# source $HOME/.config/fish/functions/pure/conf.d/pure.fish
+# set fish_function_path $HOME/.config/fish/functions/theme-pure/functions/ $fish_function_path
+# set fish_function_path $HOME/.config/fish/functions/theme-pure/ $fish_function_path
+# source $HOME/.config/fish/functions/theme-pure/conf.d/pure.fish
 
 # Readline colors
 set -g fish_color_autosuggestion 555 yellow
