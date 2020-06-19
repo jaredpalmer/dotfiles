@@ -38,7 +38,6 @@ function jenv
     end
 end
 
-rvm default
 
 set PATH $HOME/.jenv/bin $PATH
 set PATH $HOME/.yarn/bin $PATH
